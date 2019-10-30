@@ -1,6 +1,6 @@
 class ZeroMatrix {
   public static void main(String[] args) {
-    Main main = new Main();
+      ZeroMatrix main = new ZeroMatrix();
     int[][] m = {{0}};
     int[][] n;
 
