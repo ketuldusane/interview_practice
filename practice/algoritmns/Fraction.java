@@ -9,10 +9,10 @@ public class Fraction {
 
     StringBuilder sb = new StringBuilder();
     System.out.println(sAns);
-    sb.append(sAns.split(".")[0]);
+    sb.append(sAns.split("[.]")[0]);
     sb.append('.');
 
-    char[] c = sAns.split(".")[1].toCharArray();
+    char[] c = sAns.split("[.]")[1].toCharArray();
     boolean repeat = false;
     for (int i = 0; i < c.length - 1; i++) {
       if (c[i] == c[i + 1]) {
