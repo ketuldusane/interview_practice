@@ -1,3 +1,5 @@
+package linked_lists;
+
 public class Node {
   public Node next = null;
   public int data;

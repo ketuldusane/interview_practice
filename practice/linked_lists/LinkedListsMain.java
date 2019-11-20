@@ -1,3 +1,5 @@
+package linked_lists;
+
 class LinkedListsMain {
   public static void main(String[] args) {
     LinkedListsMain llm = new LinkedListsMain();

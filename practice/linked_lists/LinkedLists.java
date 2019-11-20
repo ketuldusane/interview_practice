@@ -1,3 +1,5 @@
+package linked_lists;
+
 import java.util.HashMap;
 import java.util.Stack;
 
