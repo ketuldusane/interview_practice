@@ -10,8 +10,7 @@ public class PathSum {
     if (node == null) return false;
 
     if (node.left == null && node.right == null) {
-      if (sum == (currSum + node.val)) return true;
-      return false;
+      return sum == (currSum + node.val);
     }
 
     boolean lans = hasPathSum(node.left, sum, currSum + node.val);
