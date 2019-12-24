@@ -1,4 +1,4 @@
-package algoritmns.BST;
+package tree.BST;
 
 public class DeleteNode {
   public TreeNode deleteNode(TreeNode root, int key) {

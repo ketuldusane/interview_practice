@@ -1,4 +1,4 @@
-package algoritmns.BST;
+package tree.BST;
 
 public class ValidateBST {
   public boolean isValidBST(TreeNode root) {

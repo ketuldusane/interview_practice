@@ -1,4 +1,4 @@
-package algoritmns.BST;
+package tree.BST;
 
 public class TreeNode {
   int val;
