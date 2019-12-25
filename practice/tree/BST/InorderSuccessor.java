@@ -1,5 +1,7 @@
 package tree.BST;
 
+import tree.TreeNode;
+
 import java.util.Stack;
 
 public class InorderSuccessor {

@@ -1,5 +1,7 @@
 package tree.BST;
 
+import tree.TreeNode;
+
 public class ValidateBST {
   public boolean isValidBST(TreeNode root) {
     return validate(root, null, null);

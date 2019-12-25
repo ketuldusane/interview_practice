@@ -1,4 +1,4 @@
-package tree.n_ary;
+package tree;
 
 import java.util.List;
 

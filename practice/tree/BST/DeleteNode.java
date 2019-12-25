@@ -1,5 +1,7 @@
 package tree.BST;
 
+import tree.TreeNode;
+
 public class DeleteNode {
   public TreeNode deleteNode(TreeNode root, int key) {
     if (root == null) return null;
