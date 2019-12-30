@@ -1,3 +1,5 @@
+package clone.simple;
+
 import java.lang.Cloneable;
 
 public class A implements Cloneable {

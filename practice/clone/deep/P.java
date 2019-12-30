@@ -1,3 +1,5 @@
+package clone.deep;
+
 import java.lang.Cloneable;
 
 public class P implements Cloneable {
@@ -5,9 +7,6 @@ public class P implements Cloneable {
 
   @Override
   public Object clone() throws CloneNotSupportedException {
-    P p = (P) super.clone();
-    p.x = new X();
-
-    return p;
+    return super.clone();
   }
 }

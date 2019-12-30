@@ -1,4 +1,6 @@
-public class TestDeep {
+package clone.shallow;
+
+public class Test {
   public static void main(String[] args) throws CloneNotSupportedException {
     P p1 = new P();
 
