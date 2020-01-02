@@ -70,6 +70,17 @@ public class DeepCopyList {
     return map.get(head);
   }
 
+  HashMap<Node, Node> visited = new HashMap<>();
+
+//  public Node copyRandomListRecur(Node head) {
+//    if (head == null) return null;
+//
+//    if (visited.containsKey(head)) return  visited.get(head);
+//
+//    Node node = new Node(head.val);
+////    node.next = copyRandomListRecur(head.ne)
+//  }
+
   static class Node {
     public int val;
     public Node next;
