@@ -4,7 +4,9 @@ import java.util.Stack;
 
 public class BasicCalculatorI {
   public int calculate(String s) {
-    if (s == null || s.equals("")) return 0;
+    if (s == null || s.equals("")) {
+      return 0;
+    }
 
     Stack<Integer> nums = new Stack<>();
     Stack<Character> expression = new Stack<>();
