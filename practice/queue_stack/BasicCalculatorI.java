@@ -13,6 +13,7 @@ public class BasicCalculatorI {
 
     s = s.trim();
     boolean digitFound = false;
+    int base = 1;
 
     for (int i = s.length() - 1; i >= 0; i--) {
       char token = s.charAt(i);
@@ -21,6 +22,7 @@ public class BasicCalculatorI {
 
       if (isExpression(token)) {
         digitFound = false;
+        base = 1;
         if (token == '(') {
           evaluateExpression(nums, expression, true);
         } else {
@@ -30,12 +32,13 @@ public class BasicCalculatorI {
         int x = 0;
         if (digitFound) {
           x = nums.pop();
-          x = x * 10 + ((int) token - '0');
+          x = ((int) token - '0') * base + x;
         } else {
           x = ((int) token - '0');
         }
         nums.push(x);
         digitFound = true;
+        base = base * 10;
       }
     }
 
@@ -72,6 +75,6 @@ public class BasicCalculatorI {
   }
 
   public static void main(String[] args) {
-    new BasicCalculatorI().calculate(" 2-1 + 2 ");
+    new BasicCalculatorI().calculate("2147483647");
   }
 }
