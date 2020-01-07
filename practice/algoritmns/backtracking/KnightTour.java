@@ -1,3 +1,5 @@
+package algoritmns.backtracking;
+
 import java.util.Arrays;
 
 class KnightTour {
