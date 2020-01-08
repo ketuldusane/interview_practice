@@ -32,26 +32,29 @@ public class GroupAnagrams {
   }
 
   public List<List<String>> groupAnagrams(String[] strs) {
-    Map<String, ArrayList<String>> map = new HashMap<>();
-    for (String str : strs) {
-      char[] temp = str.toCharArray();
-      Arrays.sort(temp);
-      String s = new String(temp);
-      ArrayList<String> a;
-      if (map.containsKey(s)) {
-        a = map.get(s);
-      } else {
-        a = new ArrayList<>();
-      }
-      a.add(str);
-      map.put(s, a);
-    }
-
     List<List<String>> ans = new ArrayList<>();
-    for (String key : map.keySet()) {
-      ans.add(map.get(key));
+    Map<String, List<String>> map = new HashMap<>();
+
+    for (String s : strs) {
+      String baseS = getBase(s);
+      if (map.containsKey(baseS)) {
+        map.get(baseS).add(s);
+      } else {
+        List<String> list = new ArrayList<>();
+        list.add(s);
+        map.put(baseS, list);
+        ans.add(list);
+      }
     }
 
     return ans;
+  }
+
+  private String getBase(String s) {
+    char[] c = new char[26];
+    for (int i = 0; i < s.length(); i++) {
+      c[s.charAt(i) - 'a']++;
+    }
+    return new String(c);
   }
 }
