@@ -1,5 +1,3 @@
-import clone.simple.Test;
-
 import java.util.HashMap;
 
 class TestTemp {
@@ -46,5 +44,20 @@ class TestTemp {
     t.sum("ap");
     t.insert("app", 2);
     t.sum("ap");
+
+    Integer[] a = {5,4,8,11,null,13,4,7,2,null,null,1};
+    TreeNode root = null, node = null;
+    for (Integer i : a) {
+      if (root == null) {
+        root = new TreeNode(i);
+      }
+    }
+  }
+
+  public static class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+    TreeNode(int x) { val = x; }
   }
 }
