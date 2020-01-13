@@ -10,18 +10,19 @@ public class RegularExpressionMatching {
 
     ArrayDeque<String> pattern = getPatternStack(p);
     ArrayDeque<Character> subject = getSubjectStack(s);
+    char laspPop = '\0';
 
     while (!pattern.isEmpty()) {
       String currP = pattern.pop();
       if (currP.length() > 1) {
         if (currP.equals(".*")) {
           while (!subject.isEmpty()) {
-            subject.pop();
+            laspPop = subject.pop();
           }
         } else {
           char compare = currP.charAt(0);
           while (!subject.isEmpty() && subject.peek() == compare) {
-            subject.pop();
+            laspPop = subject.pop();
           }
         }
       } else {
@@ -31,13 +32,16 @@ public class RegularExpressionMatching {
           }
         } else {
           if (subject.isEmpty()) {
-            return false;
-          }
-          String testS = Character.toString(subject.peek());
-          if (testS.equals(currP)) {
-            subject.pop();
+            if (laspPop != currP.charAt(0)) {
+              return false;
+            }
           } else {
-            return false;
+            String testS = Character.toString(subject.peek());
+            if (testS.equals(currP)) {
+              laspPop = subject.pop();
+            } else {
+              return false;
+            }
           }
         }
       }
@@ -74,6 +78,6 @@ public class RegularExpressionMatching {
 
   public static void main(String[] args) {
     RegularExpressionMatching r = new RegularExpressionMatching();
-    System.out.println(r.isMatch("ab", ".*c"));
+    System.out.println(r.isMatch("aaa", ".*a"));
   }
 }
