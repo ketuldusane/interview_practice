@@ -27,20 +27,15 @@ public class StrStr {
     if (needle.equals("")) return 0;
     if (needle.length() > haystack.length()) return -1;
 
-    for (int i = 0; i < haystack.length() - needle.length() + 1; i++) {
+    int i = 0;
+    int needleLen = needle.length();
+    while (i <= haystack.length() - needleLen) {
       if (haystack.charAt(i) == needle.charAt(0)) {
-        if (!((haystack.length() - i) < needle.length())) {
-          boolean found = true;
-          for (int j = 0; j < needle.length(); j++) {
-            if (haystack.charAt(i + j) != needle.charAt(j)) {
-              found = false;
-              break;
-            }
-          }
-
-          if (found) return i;
+        if (haystack.substring(i, i + needleLen).equals(needle)) {
+          return i;
         }
       }
+      i++;
     }
 
     return -1;
