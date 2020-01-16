@@ -39,19 +39,27 @@ class TestTemp {
   }
 
   public static void main(String[] args) {
-    TestTemp t = new TestTemp();
-    t.insert("apple", 3);
-    t.sum("ap");
-    t.insert("app", 2);
-    t.sum("ap");
-
-    Integer[] a = {5,4,8,11,null,13,4,7,2,null,null,1};
-    TreeNode root = null, node = null;
-    for (Integer i : a) {
-      if (root == null) {
-        root = new TreeNode(i);
+//    TestTemp t = new TestTemp();
+//    t.insert("apple", 3);
+//    t.sum("ap");
+//    t.insert("app", 2);
+//    t.sum("ap");
+//
+//    Integer[] a = {5,4,8,11,null,13,4,7,2,null,null,1};
+//    TreeNode root = null, node = null;
+//    for (Integer i : a) {
+//      if (root == null) {
+//        root = new TreeNode(i);
+//      }
+//    }
+    int n = 45;
+    float ans = n;
+    do {
+      ans = ans / 3;
+      if (ans == 1) {
+        System.out.println(ans);
       }
-    }
+    } while (ans > 0);
   }
 
   public static class TreeNode {
