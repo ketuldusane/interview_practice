@@ -30,7 +30,7 @@ public class UltraArrow {
   }
 
   private static List<String> generateSchedule(Map<String, Integer> numOfGifts) {
-
+    return new ArrayList<>();
   }
 
   public static void main(String[] args) {

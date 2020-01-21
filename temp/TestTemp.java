@@ -52,14 +52,27 @@ class TestTemp {
 //        root = new TreeNode(i);
 //      }
 //    }
-    int n = 45;
-    float ans = n;
-    do {
-      ans = ans / 3;
-      if (ans == 1) {
-        System.out.println(ans);
-      }
-    } while (ans > 0);
+//    int n = 45;
+//    float ans = n;
+//    do {
+//      ans = ans / 3;
+//      if (ans == 1) {
+//        System.out.println(ans);
+//      }
+//    } while (ans > 0);
+
+    int n = 10;
+    int l = 1;
+    int r = n;
+    int ans = 0;
+
+    while (l < r) {
+      int mid = (l + r) / 2;
+      ans += mid;
+      l = mid + 1;
+    }
+
+    System.out.println(ans);
   }
 
   public static class TreeNode {
