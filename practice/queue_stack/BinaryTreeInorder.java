@@ -27,7 +27,7 @@ public class BinaryTreeInorder {
     root.left = new TreeNode(2);
     root.right = new TreeNode(3);
 
-    System.out.println(new BinaryTreeInorder().inorderTraversal(root).toString());
+    System.out.println(new BinaryTreeInorder().morrisTraversal(root).toString());
   }
 
   public List<Integer> inorderTraversal(TreeNode root) {
@@ -47,6 +47,28 @@ public class BinaryTreeInorder {
       curr = curr.right;
     }
     return l;
+  }
+
+  private List<Integer> morrisTraversal(TreeNode root) {
+    List<Integer> ans = new ArrayList<>();
+    TreeNode curr = root;
+    TreeNode prev;
+    while (curr != null) {
+      if (curr.left == null) {
+        ans.add(curr.val);
+        curr = curr.right;
+      } else {
+        prev = curr.left;
+        while (prev.right != null) {
+          prev = prev.right;
+        }
+        TreeNode temp = curr;
+        prev.right = curr;
+        curr = curr.left;
+        temp.left = null;
+      }
+    }
+    return ans;
   }
 
   private List<Integer> withRecursion(TreeNode root, ArrayList<Integer> l) {
