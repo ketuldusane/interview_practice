@@ -54,9 +54,7 @@ public class NumOfSquarefullArrays {
         visited[i] = true;
         temp.add(A[i]);
 
-        if (temp.size() >= 2 && isPerfectSquare(temp)) {
-          permute(A, temp, visited);
-        } else if (temp.size() < 2) {
+        if (temp.size() < 2 || isPerfectSquare(temp)) {
           permute(A, temp, visited);
         }
 
@@ -67,11 +65,13 @@ public class NumOfSquarefullArrays {
   }
 
   private boolean isPerfectSquare(List<Integer> A) {
-    for (int i = 1; i < A.size(); i++) {
-      int num = A.get(i - 1) + A.get(i);
-      double sqrt = Math.sqrt(num);
-      if (sqrt % 1 != 0) {
-        return false;
+    if (A.size() >= 2) {
+      for (int i = 1; i < A.size(); i++) {
+        int num = A.get(i - 1) + A.get(i);
+        double sqrt = Math.sqrt(num);
+        if (sqrt % 1 != 0) {
+          return false;
+        }
       }
     }
     return true;
