@@ -75,7 +75,7 @@ public class TarjansAlgo {
         }
       }
     }
-    if ((parent.get(node) == null && adjCount >= 2) || (parent.get(node) != null))
+//    if ((parent.get(node) == null && adjCount >= 2) || (parent.get(node) != null))
   }
 
   private Node createGraph(List<List<Integer>> connections) {
