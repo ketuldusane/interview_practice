@@ -61,18 +61,23 @@ class TestTemp {
 //      }
 //    } while (ans > 0);
 
-    int n = 10;
-    int l = 1;
-    int r = n;
-    int ans = 0;
+    int[] nums = {2,0,2,1,1,0};
 
-    while (l < r) {
-      int mid = (l + r) / 2;
-      ans += mid;
-      l = mid + 1;
+    int[] vals = new int[3];
+    for (int i = 0; i < nums.length; i++) {
+      vals[0] = nums[i] == 0 ? vals[0] += 1 : vals[0];
+      vals[1] = nums[i] == 1 ? vals[1] += 1 : vals[1];
+      vals[2] = nums[i] == 2 ? vals[2] += 1 : vals[2];
     }
 
-    System.out.println(ans);
+    int pointer = 0;
+    for (int i = 0; i < nums.length; i++) {
+      if (vals[pointer] == 0) {
+        pointer++;
+      }
+      nums[i] = pointer;
+      vals[pointer]--;
+    }
   }
 
   public static class TreeNode {
