@@ -1,82 +1,59 @@
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
 
 class TestTemp {
-  class Node {
-    HashMap<Character, Node> map;
-    int val = 0;
-    int childSum = 0;
-  }
-
-  private Node root;
-
-  /** Initialize your data structure here. */
-  public TestTemp() {
-    root = new Node();
-  }
-
-  public void insert(String key, int val) {
-    Node node = root;
-    for (char c : key.toCharArray()) {
-      if (!node.map.containsKey(c)) {
-        node.map.put(c, new Node());
-      }
-      node = node.map.get(c);
-      node.childSum += val;
-    }
-    node.val = val;
-  }
-
-  public int sum(String prefix) {
-    Node node = root;
-    int sum = 0;
-    for (char c : prefix.toCharArray()) {
-      if (!node.map.containsKey(c)) {
-        return 0;
-      }
-      node = node.map.get(c);
-    }
-    return node.childSum;
-  }
-
   public static void main(String[] args) {
-//    TestTemp t = new TestTemp();
-//    t.insert("apple", 3);
-//    t.sum("ap");
-//    t.insert("app", 2);
-//    t.sum("ap");
-//
-//    Integer[] a = {5,4,8,11,null,13,4,7,2,null,null,1};
-//    TreeNode root = null, node = null;
-//    for (Integer i : a) {
-//      if (root == null) {
-//        root = new TreeNode(i);
-//      }
-//    }
-//    int n = 45;
-//    float ans = n;
-//    do {
-//      ans = ans / 3;
-//      if (ans == 1) {
-//        System.out.println(ans);
-//      }
-//    } while (ans > 0);
+    TreeNode root = new TreeNode(3);
+    root.left = new TreeNode(5);
+    root.left.left = new TreeNode(6);
+    root.left.right = new TreeNode(2);
+    root.left.right.left = new TreeNode(7);
+    root.left.right.right = new TreeNode(4);
+    root.right = new TreeNode(1);
+    root.right.left = new TreeNode(6);
+    root.right.right = new TreeNode(8);
+    new TestTemp().lowestCommonAncestor(root, root.left, root.left.right.right);
+  }
 
-    int[] nums = {2,0,2,1,1,0};
+  HashMap<TreeNode, LinkedList<TreeNode>> map = new HashMap<>();
+  public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+    generateParentMap(root);
 
-    int[] vals = new int[3];
-    for (int i = 0; i < nums.length; i++) {
-      vals[0] = nums[i] == 0 ? vals[0] += 1 : vals[0];
-      vals[1] = nums[i] == 1 ? vals[1] += 1 : vals[1];
-      vals[2] = nums[i] == 2 ? vals[2] += 1 : vals[2];
+    LinkedList<TreeNode> a = map.get(p);
+    LinkedList<TreeNode> b = map.get(q);
+
+    if (a == null || b == null) {
+      return null;
     }
 
-    int pointer = 0;
-    for (int i = 0; i < nums.length; i++) {
-      if (vals[pointer] == 0) {
-        pointer++;
+    HashSet<TreeNode> set = new HashSet<>(a);
+    for (TreeNode n : b) {
+      if (set.contains(n)) {
+        return n;
       }
-      nums[i] = pointer;
-      vals[pointer]--;
+    }
+
+    return null;
+  }
+
+  private void generateParentMap(TreeNode root) {
+    if (root == null) {
+      return;
+    }
+    LinkedList<TreeNode> temp = map.getOrDefault(root, new LinkedList<>());
+    LinkedList<TreeNode> l = new LinkedList<>(temp);
+    l.addFirst(root);
+    map.put(root, l);
+
+    if (root.left != null) {
+      map.put(root.left, l);
+      generateParentMap(root.left);
+    }
+
+    if (root.right != null) {
+      map.put(root.right, l);
+      generateParentMap(root.right);
     }
   }
 
