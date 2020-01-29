@@ -1,76 +1,56 @@
 package queue_stack;
 
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class BasicCalculatorI {
   public int calculate(String s) {
-    if (s == null || s.equals("")) {
-      return 0;
-    }
-
-    Stack<Integer> nums = new Stack<>();
-    Stack<Character> expression = new Stack<>();
-
-    s = s.trim();
-    boolean digitFound = false;
-    int base = 1;
+    int num = 0;
+    int power = 0;
+    Deque<Object> stack = new ArrayDeque<>();
 
     for (int i = s.length() - 1; i >= 0; i--) {
-      char token = s.charAt(i);
-      if (token == ' ') continue;
-
-      if (isExpression(token)) {
-        digitFound = false;
-        base = 1;
-        if (token == '(') {
-          evaluateExpression(nums, expression, true);
-        } else {
-          expression.push(token);
+      char c = s.charAt(i);
+      if (Character.isDigit(c)) {
+        num += (int) Math.pow(10, power) * (int) (c - '0');
+        power++;
+      } else if (c != ' ') {
+        if (power != 0) {
+          stack.push(num);
+          num = 0;
+          power = 0;
         }
-      } else if (Character.isDigit(token)) {
-        int x = 0;
-        if (digitFound) {
-          x = nums.pop();
-          x = ((int) token - '0') * base + x;
+        if (c == '(') {
+          int res = compute(stack);
+          stack.pop();
+          stack.push(res);
         } else {
-          x = ((int) token - '0');
+          stack.push(c);
         }
-        nums.push(x);
-        digitFound = true;
-        base = base * 10;
       }
     }
 
-    if (expression.size() > 0) {
-      evaluateExpression(nums, expression, false);
+    if (power != 0) {
+      stack.push(num);
     }
 
-    return nums.pop();
+    return compute(stack);
   }
 
-  private void evaluateExpression(Stack<Integer> nums, Stack<Character> expression, boolean isBracket) {
-    if (isBracket) {
-      while (expression.peek() != ')') {
-        evaluate(nums, expression);
-      }
-      if (expression.peek() == ')') expression.pop();
-    } else {
-      while (expression.size() > 0) {
-        evaluate(nums, expression);
+  private int compute(Deque<Object> stack) {
+    int res = 0;
+    if (!stack.isEmpty()) {
+      res = (int) stack.pop();
+    }
+    while (!stack.isEmpty() && !((char) stack.peek() == ')')) {
+      char sign = (char) stack.pop();
+      if (sign == '+') {
+        res += (int) stack.pop();
+      } else {
+        res -= (int) stack.pop();
       }
     }
-  }
-
-  private void evaluate(Stack<Integer> nums, Stack<Character> expression) {
-    int a = nums.pop();
-    int b = nums.pop();
-    char expr = expression.pop();
-    int ans = (expr == '+') ? a + b : a - b;
-    nums.push(ans);
-  }
-
-  private boolean isExpression(char token) {
-    return token == '(' || token == ')' || token == '+' || token == '-';
+    return res;
   }
 
   public static void main(String[] args) {
