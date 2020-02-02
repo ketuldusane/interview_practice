@@ -4,16 +4,26 @@ import java.util.LinkedList;
 
 class TestTemp {
   public static void main(String[] args) {
-    TreeNode root = new TreeNode(3);
-    root.left = new TreeNode(5);
-    root.left.left = new TreeNode(6);
-    root.left.right = new TreeNode(2);
-    root.left.right.left = new TreeNode(7);
-    root.left.right.right = new TreeNode(4);
-    root.right = new TreeNode(1);
-    root.right.left = new TreeNode(6);
-    root.right.right = new TreeNode(8);
-    new TestTemp().lowestCommonAncestor(root, root.left, root.left.right.right);
+    int numerator = 1;
+    int denominator= 2;
+
+    float n = (float) numerator / (float) denominator;
+    String s = String.valueOf(n);
+    String[] res = s.split(".");
+
+    String dec = res[1];
+
+    if (dec.length() == 1 && dec.charAt(0) == '0') {
+      System.out.println(res[0]);
+    }
+
+    char[] d = dec.toCharArray();
+    char f = d[0];
+    for (int i = 1; i < d.length; i++) {
+      if (d[i] != d[i - 1]) {
+        System.out.println(s);
+      }
+    }
   }
 
   HashMap<TreeNode, LinkedList<TreeNode>> map = new HashMap<>();
