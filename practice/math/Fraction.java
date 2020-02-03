@@ -1,4 +1,4 @@
-package algoritmns;
+package math;
 
 public class Fraction {
   public String fractionToDecimal(int numerator, int denominator) {
