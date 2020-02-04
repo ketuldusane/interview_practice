@@ -1,6 +1,6 @@
-package tree.BST;
+package graphs.tree.BST;
 
-import tree.TreeNode;
+import graphs.tree.TreeNode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.List;
 /**
  *
  * Kth Smallest in BST
- * Given a binary search tree, write a function kthSmallest to find the kth smallest element in it.
+ * Given a binary search graphs.tree, write a function kthSmallest to find the kth smallest element in it.
 
  Note:
  You may assume k is always valid, 1 ≤ k ≤ BST's total elements.

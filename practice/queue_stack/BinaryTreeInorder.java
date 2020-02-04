@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Stack;
 
 /*
-Given a binary tree, return the inorder traversal of its nodes' values.
+Given a binary graphs.tree, return the inorder traversal of its nodes' values.
 
 Example:
 

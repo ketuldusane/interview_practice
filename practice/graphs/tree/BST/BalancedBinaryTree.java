@@ -1,17 +1,17 @@
-package tree.BST;
+package graphs.tree.BST;
 
-import tree.TreeNode;
+import graphs.tree.TreeNode;
 
 /**
  * Balanced Binary Tree
  * <p>
- * Given a binary tree, determine if it is height-balanced.
- * For this problem, a height-balanced binary tree is defined as:
- * a binary tree in which the left and right subtrees of every node differ in height by no more than 1.
+ * Given a binary graphs.tree, determine if it is height-balanced.
+ * For this problem, a height-balanced binary graphs.tree is defined as:
+ * a binary graphs.tree in which the left and right subtrees of every node differ in height by no more than 1.
  * <p>
  * Example 1:
  * <p>
- * Given the following tree [3,9,20,null,null,15,7]:
+ * Given the following graphs.tree [3,9,20,null,null,15,7]:
  * <p>
  * 3
  * / \
@@ -22,7 +22,7 @@ import tree.TreeNode;
  * <p>
  * Example 2:
  * <p>
- * Given the following tree [1,2,2,3,3,null,null,4,4]:
+ * Given the following graphs.tree [1,2,2,3,3,null,null,4,4]:
  * <p>
  * 1
  * / \

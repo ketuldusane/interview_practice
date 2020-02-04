@@ -1,4 +1,4 @@
-package tree;
+package graphs.tree;
 
 import java.util.List;
 

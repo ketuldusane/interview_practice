@@ -1,6 +1,6 @@
-package tree.BST;
+package graphs.tree.BST;
 
-import tree.TreeNode;
+import graphs.tree.TreeNode;
 
 import java.util.Stack;
 

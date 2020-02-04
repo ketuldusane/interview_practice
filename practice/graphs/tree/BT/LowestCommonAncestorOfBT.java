@@ -1,6 +1,6 @@
-package tree.BT;
+package graphs.tree.BT;
 
-import tree.TreeNode;
+import graphs.tree.TreeNode;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -8,11 +8,11 @@ import java.util.HashSet;
 /**
  * Lowest Common Ancestor of a Binary Tree
  *
- * Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree.
+ * Given a binary graphs.tree, find the lowest common ancestor (LCA) of two given nodes in the graphs.tree.
 
  According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes p and q as the lowest node in T that has both p and q as descendants (where we allow a node to be a descendant of itself).”
 
- Given the following binary tree:  root = [3,5,1,6,2,0,8,null,null,7,4]
+ Given the following binary graphs.tree:  root = [3,5,1,6,2,0,8,null,null,7,4]
 
  Example 1:
 
@@ -29,7 +29,7 @@ import java.util.HashSet;
  Note:
 
  All of the nodes' values will be unique.
- p and q are different and both values will exist in the binary tree.
+ p and q are different and both values will exist in the binary graphs.tree.
  */
 
 public class LowestCommonAncestorOfBT {

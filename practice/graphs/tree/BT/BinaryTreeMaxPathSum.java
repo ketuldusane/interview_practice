@@ -1,13 +1,13 @@
-package tree.BT;
+package graphs.tree.BT;
 
-import tree.TreeNode;
+import graphs.tree.TreeNode;
 
 /**
  * Binary Tree Max Path Sum
  *
- * Given a non-empty binary tree, find the maximum path sum.
+ * Given a non-empty binary graphs.tree, find the maximum path sum.
 
- For this problem, a path is defined as any sequence of nodes from some starting node to any node in the tree along the parent-child connections. The path must contain at least one node and does not need to go through the root.
+ For this problem, a path is defined as any sequence of nodes from some starting node to any node in the graphs.tree along the parent-child connections. The path must contain at least one node and does not need to go through the root.
 
  Example 1:
 

@@ -1,4 +1,4 @@
-package tree;
+package graphs.tree;
 
 public class TreeNode {
   public int val;

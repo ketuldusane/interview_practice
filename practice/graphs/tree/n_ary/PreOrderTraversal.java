@@ -1,6 +1,6 @@
-package tree.n_ary;
+package graphs.tree.n_ary;
 
-import tree.Node;
+import graphs.tree.Node;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,7 +11,7 @@ import java.util.Stack;
 /**
  * N-ary Tree Preorder Traversal
  * <p>
- * Given an n-ary tree, return the preorder traversal of its nodes' values.
+ * Given an n-ary graphs.tree, return the preorder traversal of its nodes' values.
  * Nary-Tree input serialization is represented in their level order traversal, each group of children is separated by the null value (See examples).
  * <p>
  * Follow up:
@@ -26,7 +26,7 @@ import java.util.Stack;
  * Output: [1,2,3,6,7,11,14,4,8,12,5,9,13,10]
  * <p>
  * Constraints:
- * The height of the n-ary tree is less than or equal to 1000
+ * The height of the n-ary graphs.tree is less than or equal to 1000
  * The total number of nodes is between [0, 10^4]
  */
 
