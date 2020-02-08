@@ -1,6 +1,12 @@
 package graphs.tarjans;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Critical Connections in a Network
@@ -40,7 +46,7 @@ public class CriticalConnectionsInNetwork {
         Node a = list.get(i);
         Node b = list.get(j);
         if (a.neighbors.contains(b) || b.neighbors.contains(a)) {
-          ans.add(new ArrayList<Integer>(Arrays.asList(a.val, b.val)));
+          ans.add(new ArrayList<>(Arrays.asList(a.val, b.val)));
         }
       }
     }
