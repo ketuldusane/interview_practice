@@ -1,12 +1,12 @@
 package graphs.binary_tree;
 
 public class TreeNode<T> {
-    public T key;
+    public T val;
     public TreeNode<T> left;
     public TreeNode<T> right;
 
-    public TreeNode(T key) {
-        this.key = key;
+    public TreeNode(T val) {
+        this.val = val;
         left = right = null;
     }
 }

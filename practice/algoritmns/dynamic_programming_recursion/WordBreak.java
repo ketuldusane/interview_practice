@@ -1,8 +1,6 @@
 package algoritmns.dynamic_programming_recursion;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  Word Break
@@ -32,6 +30,7 @@ import java.util.Set;
 
 public class WordBreak {
   public boolean wordBreak(String s, List<String> wordDict) {
+    // recursion using memoization
     return word(s, new HashSet<>(wordDict), 0, new Boolean[s.length()]);
   }
 
@@ -48,5 +47,31 @@ public class WordBreak {
       }
     }
     return memo[start] = false;
+  }
+
+  // Another solution using BFS
+  private boolean findWordBreak(String s, List<String> wordDict) {
+    if (s == null || s.length() == 0 || wordDict == null || wordDict.size() == 0) {
+      return false;
+    }
+    Set<String> dict = new HashSet<>(wordDict);
+    Deque<Integer> queue = new ArrayDeque<>();
+    int[] visited = new int[s.length()];
+    queue.offer(0);
+    while (!queue.isEmpty()) {
+      int start = queue.poll();
+      if (visited[start] == 0) {
+        for (int end = start + 1; end <= s.length(); end++) {
+          if (dict.contains(s.substring(start, end))) {
+            queue.offer(end);
+            if (end == s.length()) {
+              return true;
+            }
+          }
+        }
+        visited[start] = 1;
+      }
+    }
+    return false;
   }
 }
