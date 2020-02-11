@@ -1,76 +1,55 @@
-import java.util.*;
-
 class TestTemp {
   public static void main(String[] args) {
     TestTemp t = new TestTemp();
-    String b = "hit";
-    String e = "cog";
-    List<List<String>> ans = t.findLadders(b, e, new ArrayList<>(Arrays.asList("hot","dot","dog","lot","log","cog")));
+    int[][] grid = {{1,0,0,0},{0,0,0,0},{0,0,0,2}};
+    int ans = t.uniquePathsIII(grid);
+    System.out.println(ans);
   }
 
-  public List<List<String>> findLadders(String beginWord, String endWord, List<String> wordList) {
-    Set<String> dict = new HashSet<>(wordList);
-    int minLen = bfs(beginWord, endWord, dict);
-    List<List<String>> ans = new ArrayList<>();
-    List<String> temp = new ArrayList();
-    temp.add(beginWord);
-    backtrack(ans, temp, endWord, dict, new HashSet<>(), minLen, beginWord);
-    return ans;
+  private int count = 0;
+  private int wall = 0;
+  private int[][] dir = {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
+
+  public int uniquePathsIII(int[][] grid) {
+    if (grid == null || grid.length == 0) {
+      return count;
+    }
+    for (int i = 0; i < grid.length; i++) {
+      for (int j = 0; j < grid[0].length; j++) {
+        if (grid[i][j] == -1) {
+          wall++;
+        }
+      }
+    }
+    for (int i = 0; i < grid.length; i++) {
+      for (int j = 0; j < grid[0].length; j++) {
+        if (grid[i][j] == 1) {
+          boolean[][] visited = new boolean[grid.length][grid[0].length];
+          visited[i][j] = true;
+          backtrack(grid, i, j, 1, visited);
+        }
+      }
+    }
+    return count;
   }
 
-  private void backtrack(List<List<String>> ans, List<String> temp, String endword, Set<String> dict, Set<String> visited, int len, String next) {
-    if (temp.size() > len) {
+  private void backtrack(int[][] grid, int i, int j, int pathSize, boolean[][] visited) {
+    if (grid[i][j] == -1) {
       return;
-    } else if (temp.size() == len) {
-      if (next.equals(endword)) {
-        ans.add(new ArrayList<>(temp));
-        return;
-      }
-    } else {
-      for (String neighbor : getNeighbors(next, dict, visited)) {
-        temp.add(neighbor);
-        backtrack(ans, temp, endword, dict, visited, len, neighbor);
-        temp.remove(neighbor);
+    }
+    if (grid[i][j] == 2) {
+      if (pathSize == (grid.length * grid[0].length) - wall) {
+        count++;
       }
     }
-  }
-
-  private int bfs(String beginWord, String endWord, Set<String> dict) {
-    Set<String> visited = new HashSet<>();
-    Deque<String> queue = new ArrayDeque<>();
-    queue.offer(beginWord);
-    int ladder = 1;
-    while (!queue.isEmpty()) {
-      int size = queue.size();
-      for (int i = 0; i < size; i++) {
-        String temp = queue.poll();
-        if (temp.equals(endWord)) {
-          return ladder;
-        }
-        for (String neighbor : getNeighbors(temp, dict, visited)) {
-          queue.offer(neighbor);
-        }
-      }
-      ladder++;
-    }
-    return -1;
-  }
-
-  private List<String> getNeighbors(String word, Set<String> dict, Set<String> visited) {
-    List<String> neighbors = new ArrayList<>();
-    for (int i = 0; i < word.length(); i++) {
-      char[] w = word.toCharArray();
-      for (char c = 'a'; c <= 'z'; c++) {
-        if (w[i] == c) {
-          continue;
-        }
-        w[i] = c;
-        String temp = new String(w);
-        if (dict.contains(temp) && !visited.contains(temp)) {
-          neighbors.add(temp);
-        }
+    for (int k = 0; k < dir.length; k++) {
+      int x = i + dir[k][0];
+      int y = j + dir[k][1];
+      if (x >= 0 && x < grid.length && y >= 0 && y < grid[0].length && !visited[x][y]) {
+        visited[x][y] = true;
+        backtrack(grid, x, y, pathSize + 1, visited);
+        visited[x][y] = false;
       }
     }
-    return neighbors;
   }
 }
