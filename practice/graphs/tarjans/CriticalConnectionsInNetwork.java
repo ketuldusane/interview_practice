@@ -25,72 +25,57 @@ import java.util.Set;
  * Explanation: [[3,1]] is also accepted.
  */
 public class CriticalConnectionsInNetwork {
-  private int time = 0;
-
   public List<List<Integer>> criticalConnections(int n, List<List<Integer>> connections) {
-    Node root = createGraph(n, connections);
+    // Create a graph using the connections provided
+    Map<Integer, Node> nodes = createGraph(n, connections);
 
-    Set<Node> articulationPoints = new HashSet<>();
-    Set<Node> visited = new HashSet<>();
-    Map<Node, Integer> visitTime = new HashMap<>();
-    Map<Node, Integer> lowTime = new HashMap<>();
-    Map<Node, Node> parent = new HashMap<>();
+    // Mark each edge as visited, and do a DFS and see if you can visit all nodes
+    // If you can visit all the nodes, then this is not a critical edge
+    List<List<Integer>> criticalEdges = new ArrayList<>();
+    Map<Integer, Integer> testedEdges = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      Node node = nodes.get(i);
+      Map<Integer, Integer> avoid = new HashMap<>();
+      for (Node neighbor : node.neighbors) {
+        if ((testedEdges.containsKey(node.val) && testedEdges.get(node.val) == neighbor.val) || (testedEdges.containsKey(neighbor.val) && testedEdges.get(neighbor.val) == node.val)) {
+          continue;
+        }
 
-    dfs(root, articulationPoints, visited, visitTime, lowTime, parent);
+        avoid.put(node.val, neighbor.val);
+        avoid.put(neighbor.val, node.val);
 
-    // establish edges
-    List<List<Integer>> ans = new ArrayList<>();
-    List<Node> list = new ArrayList<>(articulationPoints);
-    for (int i = 0; i < list.size(); i++) {
-      for (int j = i + 1; j < list.size(); j++) {
-        Node a = list.get(i);
-        Node b = list.get(j);
-        if (a.neighbors.contains(b) || b.neighbors.contains(a)) {
-          ans.add(new ArrayList<>(Arrays.asList(a.val, b.val)));
+        testedEdges.put(node.val, neighbor.val);
+        testedEdges.put(neighbor.val, node.val);
+
+        Set<Node> visited = new HashSet<>();
+        dfs(node, avoid, visited);
+
+        avoid.remove(node.val);
+        avoid.remove(neighbor.val);
+
+        if (visited.size() != n) {
+          criticalEdges.add(Arrays.asList(node.val, neighbor.val));
         }
       }
     }
-    return ans;
+    return criticalEdges;
   }
 
-  private void dfs(Node node, Set<Node> art, Set<Node> visited, Map<Node, Integer> vTime, Map<Node, Integer> lTime, Map<Node, Node> parent) {
+  private void dfs(Node node, Map<Integer, Integer> avoid, Set<Node> visited) {
     visited.add(node);
-    vTime.put(node, time);
-    lTime.put(node, time);
-    time++;
-
-    int child = 0;
-    boolean isArticulation = false;
-
-    for (Node neighbor : node.neighbors) {
-      // If neighbor is a parent of node
-      if (neighbor == parent.get(node)) {
+    List<Node> neighbors = node.neighbors;
+    for (Node neighbor : neighbors) {
+      // The edge should not be in avoid map
+      // The neighbor should not have been visited yet
+      if (avoid.containsKey(node.val) && avoid.get(node.val) == neighbor.val) {
         continue;
+      } else if (!visited.contains(neighbor)) {
+        dfs(neighbor, avoid, visited);
       }
-      // If neighbor has not been visited, then visite it
-      if (!visited.contains(neighbor)) {
-        parent.put(neighbor, node);
-        child++;
-        dfs(neighbor, art, visited, vTime, lTime, parent);
-
-        // Check if articulation point
-        if (vTime.get(node) <= lTime.get(neighbor)) {
-          isArticulation = true;
-        } else {
-          lTime.put(node, Math.min(lTime.get(node), lTime.get(neighbor)));
-        }
-      } else {
-        lTime.put(node, Math.min(lTime.get(node), vTime.get(neighbor)));
-      }
-    }
-
-    // Collect articulation point
-    if ((parent.get(node) == null && child >= 2) || (parent.get(node) != null && isArticulation)) {
-      art.add(node);
     }
   }
 
-  private Node createGraph(int n, List<List<Integer>> connections) {
+  private Map<Integer, Node> createGraph(int n, List<List<Integer>> connections) {
     Map<Integer, Node> nodes = new HashMap<>();
     for (int i = 0; i < n; i++) {
       nodes.put(i, new Node(i));
@@ -101,10 +86,10 @@ public class CriticalConnectionsInNetwork {
       a.neighbors.add(b);
       b.neighbors.add(a);
     }
-    return nodes.get(0);
+    return nodes;
   }
 
-  class Node {
+  private static class Node {
     int val;
     List<Node> neighbors;
     Node(int v) {
@@ -122,5 +107,8 @@ public class CriticalConnectionsInNetwork {
     l.add(Arrays.asList(2, 0));
     l.add(Arrays.asList(1, 3));
     c.criticalConnections(4, l);
+    for (List<Integer> ans : c.criticalConnections(4, l)) {
+      System.out.println(ans);
+    }
   }
 }
