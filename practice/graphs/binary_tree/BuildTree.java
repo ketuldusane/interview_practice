@@ -1,7 +1,7 @@
 package graphs.binary_tree;
 
 public class BuildTree {
-  private TreeNode<Integer> root = null;
+  private TreeNode root = null;
 
   public static void main(String[] args) {
     BuildTree b = new BuildTree();

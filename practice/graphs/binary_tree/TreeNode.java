@@ -1,11 +1,11 @@
 package graphs.binary_tree;
 
-public class TreeNode<T> {
-    public T val;
-    public TreeNode<T> left;
-    public TreeNode<T> right;
+public class TreeNode {
+    public int val;
+    public TreeNode left;
+    public TreeNode right;
 
-    public TreeNode(T val) {
+    public TreeNode(int val) {
         this.val = val;
         left = right = null;
     }

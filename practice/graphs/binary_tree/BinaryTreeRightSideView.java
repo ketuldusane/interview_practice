@@ -24,7 +24,7 @@ import java.util.List;
  */
 
 public class BinaryTreeRightSideView {
-  public List<Integer> rightSideView(TreeNode<Integer> root) {
+  public List<Integer> rightSideView(TreeNode root) {
     List<Integer> list = new LinkedList<>();
     if (root == null) {
       return list;
@@ -37,7 +37,7 @@ public class BinaryTreeRightSideView {
     return list;
   }
 
-  private void levelOrder(TreeNode<Integer> node, int level, List<List<TreeNode>> list) {
+  private void levelOrder(TreeNode node, int level, List<List<TreeNode>> list) {
     if (node == null) {
       return;
     }

@@ -31,7 +31,7 @@ package graphs.binary_tree;
  */
 
 public class MergTwoBinaryTrees {
-  public TreeNode<Integer> mergeTrees(TreeNode<Integer> t1, TreeNode<Integer> t2) {
+  public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
     if (t1 == null) {
       return t2;
     }
