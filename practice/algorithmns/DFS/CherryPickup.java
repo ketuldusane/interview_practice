@@ -43,26 +43,26 @@ public class CherryPickup {
     return Math.max(0, dfs(grid, memo, 0, 0, 0));
   }
 
+  // Run two processes in parallel
+  // Both will go from 0,0 to n - 1, n - 1 and will try to maximize the results
+  // Another important fact is: since both can only travel in right or down, this equation will always hold true
+  // r1 + c1 = r2 + c2
   private int dfs(int[][] grid, int[][][] memo, int r1, int c1, int c2) {
-    // Remember the fact that r1 + c1 = r2 + c2
     int r2 = r1 + c1 - c2;
-    if (r1 >= grid.length || r2 >= grid.length || c1 >= grid[0].length || c2 >= grid[0].length || grid[r1][c1] == -1 || grid[r2][c2] == -1) {
+    if (r1 >= grid.length || r2 >= grid.length || c1 >= grid[0].length || c2 >= grid[0].length || grid[r1][c1] == -1
+      || grid[r2][c2] == -1) {
       return Integer.MIN_VALUE;
+    }
+    if (r1 == grid.length - 1 && c1 == grid[0].length - 1) {
+      return grid[r1][c1];
     }
     if (memo[r1][c1][c2] != 0) {
       return memo[r1][c1][c2];
-    }
-    if (r1 == grid.length - 1 && c1 == grid.length - 1) {
-      return grid[r1][c1];
     }
     int result = grid[r1][c1];
     if (r1 != r2 || c1 != c2) {
       result += grid[r2][c2];
     }
-    // down down
-    // right right
-    // down right
-    // right down
     int next = Math.max(dfs(grid, memo, r1 + 1, c1, c2), dfs(grid, memo, r1, c1 + 1, c2 + 1));
     next = Math.max(next, dfs(grid, memo, r1 + 1, c1, c2 + 1));
     next = Math.max(next, dfs(grid, memo, r1, c1 + 1, c2));
