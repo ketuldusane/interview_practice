@@ -48,23 +48,6 @@ public class LRUCache {
     map = new HashMap<>();
   }
 
-  public static void main(String[] args) {
-    /*
-    ["LRUCache","put","put","get","put","get","put","get","get","get"]
-    [[2],[1,1],[2,2],[1],[3,3],[2],[4,4],[1],[3],[4]]
-     */
-    LRUCache l = new LRUCache(2);
-    l.put(1, 1);
-    l.put(2, 2);
-    l.get(1);
-    l.put(3, 3);
-    l.get(2);
-    l.put(4, 4);
-    l.get(1);
-    l.get(3);
-    l.get(4);
-  }
-
   public int get(int key) {
     if (map.containsKey(key)) {
       Item item = map.get(key);
@@ -121,6 +104,23 @@ public class LRUCache {
       value = v;
       age = a;
     }
+  }
+
+  public static void main(String[] args) {
+    /*
+    ["LRUCache","put","put","get","put","get","put","get","get","get"]
+    [[2],[1,1],[2,2],[1],[3,3],[2],[4,4],[1],[3],[4]]
+     */
+    LRUCache l = new LRUCache(2);
+    l.put(1, 1);
+    l.put(2, 2);
+    l.get(1);
+    l.put(3, 3);
+    l.get(2);
+    l.put(4, 4);
+    l.get(1);
+    l.get(3);
+    l.get(4);
   }
 }
 
