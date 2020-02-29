@@ -1,3 +1,5 @@
+package algorithmns.dynamic_programming_recursion;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,10 +25,10 @@ class PascalsTriangle {
 
   public List<Integer> getRow(int rowIndex) {
     List<Integer> currRow = new ArrayList<>();
-    List<Integer> prevRow = new ArrayList<>();      
-    
+    List<Integer> prevRow = new ArrayList<>();
+
     if (rowIndex <= 0 || rowIndex > 33) return currRow;
-    
+
     for (int i = 0; i <= rowIndex; i++) {
       for (int j = 0; j < (i + 1); j++) {
         if (i == j || j == 0) {
@@ -36,11 +38,11 @@ class PascalsTriangle {
           currRow.add(val);
         }
       }
-      
+
       if (i == rowIndex) {
         break;
       }
-      
+
       prevRow = currRow;
       currRow = new ArrayList<>();
     }

@@ -1,3 +1,5 @@
+package algorithmns.dynamic_programming_recursion;
+
 class MagicIndex {
   int magicIndex(int[] a) {
     return magicIndex(a, 0, a.length - 1);
@@ -13,7 +15,7 @@ class MagicIndex {
     int leftIndex = Math.min(mid - 1, a[mid]);
     int left = magicIndex(a, start, leftIndex);
     if (left >= 0) return left;
-    
+
     // search right
     int rightIndex = Math.max(mid + 1, a[mid]);
     int right = magicIndex(a, rightIndex, end);
