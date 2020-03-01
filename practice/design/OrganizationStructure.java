@@ -21,7 +21,8 @@ public class OrganizationStructure {
     o.add("8", "L", "-1");
     o.add("9", "L1", "8");
     o.add("6", "F", "1");
-    o.remove("8");
+    System.out.println(o.count("1"));
+//    o.remove("8");
     o.print();
   }
 
@@ -62,7 +63,7 @@ public class OrganizationStructure {
 
   public int count(String employeeId) {
     Map<String, Set<Employee>> map = getManagerMap();
-    return searchAndCount(map, new HashSet<>(), employeeId);
+    return searchAndCount(map, employeeId);
   }
 
   public void print() {
@@ -83,13 +84,10 @@ public class OrganizationStructure {
     }
   }
 
-  private int searchAndCount(Map<String, Set<Employee>> map, Set<String> visited, String employeeId) {
-    int ans = 0;
+  private int searchAndCount(Map<String, Set<Employee>> map, String employeeId) {
+    int ans = 1;
     for (Employee employee : map.getOrDefault(employeeId, new HashSet<>())) {
-      if (!visited.contains(employee.id)) {
-        visited.add(employee.id);
-        ans = ans + 1 + searchAndCount(map, visited, employee.id);
-      }
+      ans = ans + searchAndCount(map, employee.id);
     }
     return ans;
   }
