@@ -1,4 +1,4 @@
-package algorithmns.backtracking;
+package algorithmns.traversal.backtracking;
 
 /**
  * Unique Paths III

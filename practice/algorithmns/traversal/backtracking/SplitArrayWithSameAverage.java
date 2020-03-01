@@ -1,4 +1,4 @@
-package algorithmns.backtracking;
+package algorithmns.traversal.backtracking;
 
 /**
  * Split Array With Same Average

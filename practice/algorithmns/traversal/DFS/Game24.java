@@ -1,4 +1,4 @@
-package algorithmns.DFS;
+package algorithmns.traversal.DFS;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package algorithmns.BFS;
+package algorithmns.traversal.BFS;
 
 import java.util.PriorityQueue;
 

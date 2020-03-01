@@ -1,4 +1,4 @@
-package algorithmns.backtracking;
+package algorithmns.traversal.backtracking;
 
 import java.util.HashSet;
 

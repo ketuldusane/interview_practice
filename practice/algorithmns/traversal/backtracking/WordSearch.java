@@ -1,4 +1,4 @@
-package algorithmns.backtracking;
+package algorithmns.traversal.backtracking;
 
 public class WordSearch {
   public boolean exist(char[][] board, String word) {
