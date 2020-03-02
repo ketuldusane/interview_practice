@@ -1,6 +1,12 @@
 package design;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
 
 /**
  * Insert, Delete, GetRandom O(1) - Duplicates Allowed
