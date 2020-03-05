@@ -34,17 +34,44 @@ import java.util.Set;
  */
 
 public class ConfusingNumberII {
-  public static void main(String[] args) {
-    ConfusingNumberII confusingNumberII = new ConfusingNumberII();
-    int ans = confusingNumberII.confusingNumberII(1000000000);
-    System.out.println(ans);
-  }
+  private int ans = 0;
 
   public int confusingNumberII(int N) {
     if (N <= 5) {
       return 0;
     }
     int[] nums = {0, 1, 6, 8, 9};
+    dfs(N, nums, 0);
+    return ans;
+  }
+
+  private void dfs(int N, int[] nums, long num) {
+    if (num > N) {
+      return;
+    }
+    if (num <= N && !check(num)) {
+      ans++;
+    }
+    int start = (num == 0) ? 1 : 0;
+    for (int i = start; i < nums.length; i++) {
+      dfs(N, nums, num * 10 + nums[i]);
+    }
+  }
+
+  private boolean check(long n) {
+    StringBuilder sb = new StringBuilder();
+    sb.append(n);
+    for (int i = 0; i < sb.length(); i++) {
+      if (sb.charAt(i) == '6') {
+        sb.setCharAt(i, '9');
+      } else if (sb.charAt(i) == '9') {
+        sb.setCharAt(i, '6');
+      }
+    }
+    return Long.parseLong(sb.reverse().toString()) == n;
+  }
+
+  private int confusingUsingBacktracking(int N, int[] nums) {
     Set<String> ans = new HashSet<>();
     backtrack(ans, nums, N, Integer.toString(N), new StringBuilder());
     return ans.size();
