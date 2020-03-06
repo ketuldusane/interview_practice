@@ -5,30 +5,30 @@ import java.util.Deque;
 
 /**
  * Smallest Subsequence of Distinct Characters
- * <p>
+ *
  * Return the lexicographically smallest subsequence of text that contains all the distinct characters of text exactly
  * once.
- * <p>
+ *
  * Example 1:
  * Input: "cdadabcc"
  * Output: "adbc"
- * <p>
+ *
  * Example 2:
  * Input: "abcd"
  * Output: "abcd"
- * <p>
+ *
  * Example 3:
  * Input: "ecbacba"
  * Output: "eacb"
- * <p>
+ *
  * Example 4:
  * Input: "leetcode"
  * Output: "letcod"
- * <p>
+ *
  * Constraints:
  * 1 <= text.length <= 1000
  * text consists of lowercase English letters.
- * <p>
+ *
  * Duplicate Question: https://leetcode.com/problems/remove-duplicate-letters/submissions/
  */
 
