@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 public class Steps {
   BigInteger steps(int n) {
-    BigInteger memo[] = new BigInteger[n + 1];
+    BigInteger[] memo = new BigInteger[n + 1];
     Arrays.fill(memo, BigInteger.valueOf(-1));
     return steps(n, memo);
   }
