@@ -1,4 +1,4 @@
-package algorithmns.divie_and_conquer;
+package algorithmns.divide_and_conquer;
 
 /**
  * Burst Baloons
