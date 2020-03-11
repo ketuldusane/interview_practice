@@ -2,6 +2,7 @@ package arrays;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * Diagonal Traverse
@@ -25,38 +26,89 @@ import java.util.Collections;
 
 public class DiagonalTraverse {
   public int[] findDiagonalOrder(int[][] matrix) {
-    if (matrix == null || matrix.length == 0) {
+    return usingArray(matrix);
+  }
+
+  private int[] usingArray(int[][] matrix) {
+    if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
       return new int[0];
     }
 
-    int M = matrix.length;
-    int N = matrix[0].length;
-    int pos = 0;
+    int m = matrix.length;
+    int n = matrix[0].length;
+    int row = 0;
+    int col = 0;
+    int[] ans = new int[m * n];
 
-    int[] result = new int[M * N];
-    ArrayList<Integer> diagonal = new ArrayList<>();
+    for (int i = 0; i < m * n; i++) {
+      // (row + col) % 2 = 0 for up direction always
 
-    for (int d = 0; d < M + N - 1; d++) {
-      diagonal.clear();
-      int row = d < N ? 0 : d - N + 1;
-      int column = d < N ? d : N - 1;
+      ans[i] = matrix[row][col];
 
-      while (row < M && column >= 0) {
-        diagonal.add(matrix[row][column]);
-        row++;
-        column--;
-      }
-
-      if (d % 2 == 0) {
-        Collections.reverse(diagonal);
-      }
-
-      for (int i : diagonal) {
-        result[pos] = i;
-        pos++;
+      if ((row + col) % 2 == 0) {
+        if (col == n - 1) {
+          row++;
+        } else if (row == 0) {
+          col++;
+        } else {
+          row--;
+          col++;
+        }
+      } else {
+        if (row == m - 1) {
+          col++;
+        } else if (col == 0) {
+          row++;
+        } else {
+          row++;
+          col--;
+        }
       }
     }
 
-    return result;
+    return ans;
+  }
+
+  private int[] usingReverseLists(int[][] matrix) {
+    if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+      return new int[0];
+    }
+    List<List<Integer>> ans = new ArrayList<>();
+    for (int i = 0; i < matrix.length; i++) {
+      List<Integer> a = new ArrayList<>();
+      dfs(matrix, i, 0, a);
+      ans.add(a);
+    }
+    for (int j = 1; j < matrix[0].length; j++) {
+      List<Integer> a = new ArrayList<>();
+      dfs(matrix, matrix.length - 1, j, a);
+      ans.add(a);
+    }
+    List<Integer> sol = new ArrayList<>();
+    for (int i = 0; i < ans.size(); i++) {
+      List<Integer> a = ans.get(i);
+      if (i % 2 == 0) {
+        sol.addAll(a);
+      } else {
+        Collections.reverse(a);
+        sol.addAll(a);
+      }
+    }
+    int[] m = new int[sol.size()];
+    for (int i = 0; i < m.length; i++) {
+      m[i] = sol.get(i);
+    }
+    return m;
+  }
+
+  private void dfs(int[][] mat, int i, int j, List<Integer> a) {
+    if (isValid(mat, i, j)) {
+      a.add(mat[i][j]);
+      dfs(mat, i - 1, j + 1, a);
+    }
+  }
+
+  private boolean isValid(int[][] mat, int i, int j) {
+    return i >= 0 && i < mat.length && j >= 0 && j < mat[0].length;
   }
 }
