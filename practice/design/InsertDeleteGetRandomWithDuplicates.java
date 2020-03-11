@@ -76,13 +76,16 @@ public class InsertDeleteGetRandomWithDuplicates {
     if (!map.containsKey(val) || map.get(val).size() == 0) {
       return false;
     }
-    int idx = map.get(val).iterator().next();
-    map.get(val).remove(idx);
+    int removeIdx = map.get(val).iterator().next();
+    map.get(val).remove(removeIdx);
+
     int last = list.get(list.size() - 1);
-    list.set(idx, last);
-    map.get(last).add(idx);
+    list.set(removeIdx, last);
+    map.get(last).add(removeIdx);
+
     map.get(last).remove(list.size() - 1);
     list.remove(list.size() - 1);
+
     return true;
   }
 

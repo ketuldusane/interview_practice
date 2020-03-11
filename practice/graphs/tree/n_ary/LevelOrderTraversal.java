@@ -2,10 +2,10 @@ package graphs.tree.n_ary;
 
 import graphs.tree.Node;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.Deque;
 import java.util.List;
-import java.util.Queue;
 
 /**
  * N-ary Tree Level Order Traversal
@@ -31,8 +31,10 @@ public class LevelOrderTraversal {
   public List<List<Integer>> levelOrder(Node root) {
     List<List<Integer>> result = new ArrayList<>();
     if (root == null) return result;
-    Queue<Node> queue = new LinkedList<>();
+
+    Deque<Node> queue = new ArrayDeque<>();
     queue.add(root);
+
     while (!queue.isEmpty()) {
       List<Integer> level = new ArrayList<>();
       int size = queue.size();
