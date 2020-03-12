@@ -65,7 +65,7 @@ public class BoundaryOfBinaryTree {
     }
 
     // Goal is to get all the edge nodes in anticlockwise dir
-    // edge = { left most nodes + leaft nodes + right most nodes }
+    // edge = { left most nodes + leaf nodes + right most nodes }
 
     if (!isLeaf(root)) {
       ans.add(root.val);

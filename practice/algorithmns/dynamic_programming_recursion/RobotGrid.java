@@ -1,9 +1,12 @@
+package algorithmns.dynamic_programming_recursion;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 
 class RobotGrid {
   class Point {
     int row, col;
+
     Point(int r, int c) {
       row = r;
       col = c;
@@ -39,9 +42,9 @@ class RobotGrid {
 
   public static void main(String[] args) {
     boolean[][] maze = new boolean[][] {
-      {true, true, false},
-      {false, true, true},
-      {true, false, true}
+        {true, true, false},
+        {false, true, true},
+        {true, false, true}
     };
 
     RobotGrid m = new RobotGrid();
