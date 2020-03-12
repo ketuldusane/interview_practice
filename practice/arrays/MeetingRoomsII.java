@@ -1,6 +1,7 @@
 package arrays;
 
 import java.util.HashMap;
+import java.util.PriorityQueue;
 
 /**
  * Meetings Rooms II
@@ -18,11 +19,17 @@ import java.util.HashMap;
  * NOTE: input types have been changed on April 15, 2019. Please reset to default code definition to get new method signature.
  */
 public class MeetingRoomsII {
+  // The better approach is using the priority queue
+
   public int minMeetingRooms(int[][] intervals) {
     if (intervals == null || intervals.length == 0 || intervals[0].length == 0) {
       return 0;
     }
 
+    return usingQueue(intervals);
+  }
+
+  private int usingMap(int[][] intervals) {
     HashMap<Integer, Integer> startTimes = new HashMap<>();
     HashMap<Integer, Integer> stopTimes = new HashMap<>();
 
@@ -57,5 +64,46 @@ public class MeetingRoomsII {
     }
 
     return maxConcurrentMeetings;
+  }
+
+  private int usingQueue(int[][] intervals) {
+    PriorityQueue<Event> queue = new PriorityQueue<>();
+    for (int[] interval : intervals) {
+      queue.offer(new Event(interval[0], true));
+      queue.offer(new Event(interval[1], false));
+    }
+
+    int maxRooms = 0;
+    int activeRooms = 0;
+
+    while (!queue.isEmpty()) {
+      Event e = queue.poll();
+      if (e.isStart) {
+        activeRooms++;
+      } else {
+        activeRooms--;
+      }
+      maxRooms = Math.max(maxRooms, activeRooms);
+    }
+
+    return maxRooms;
+  }
+
+  private static class Event implements Comparable<Event> {
+    int time;
+    boolean isStart;
+
+    Event(int t, boolean i) {
+      time = t;
+      isStart = i;
+    }
+
+    @Override
+    public int compareTo(Event e) {
+      if (this.time == e.time) {
+        return Boolean.compare(this.isStart, e.isStart);
+      }
+      return this.time - e.time;
+    }
   }
 }
