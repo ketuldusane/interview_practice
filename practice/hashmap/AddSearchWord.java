@@ -1,8 +1,5 @@
 package hashmap;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * Add and Search Word - Data structure design
  * <p>
@@ -85,7 +82,7 @@ public class AddSearchWord {
     return false;
   }
 
-  class TrieNode {
+  private static class TrieNode {
     TrieNode[] children = new TrieNode[26];
     boolean isWord = false;
   }
