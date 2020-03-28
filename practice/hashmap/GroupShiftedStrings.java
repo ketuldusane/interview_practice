@@ -44,7 +44,7 @@ public class GroupShiftedStrings {
     for (int i = 0; i < s.length(); i++) {
       int d = (int) s.charAt(i) - distance;
       d = d < 97 ? (122 - (97 - d) + 1) : d;
-      d = d > 127 ? (d - 122 + 97) : d;
+      d = d > 122 ? (d - 122 + 97) : d;
       newS[i] = (char) d;
     }
 

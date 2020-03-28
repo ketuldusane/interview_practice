@@ -2,6 +2,7 @@ package design;
 
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.PriorityQueue;
 
 /**
@@ -34,7 +35,86 @@ import java.util.PriorityQueue;
  * cache.get(4);       // returns 4
  */
 
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache obj = new LRUCache(capacity);
+ * int param_1 = obj.get(key);
+ * obj.put(key,value);
+ */
+
 public class LRUCache {
+  // Using a doubly linked list
+  private int capacity;
+  private int currentCapacity;
+  private Node head;
+  private Node tail;
+  private Map<Integer, Node> map;
+
+  public LRUCache(int capacity) {
+    this.capacity = capacity;
+    currentCapacity = 0;
+    map = new HashMap<>();
+    head = new Node(-1, -1);
+    tail = new Node(-1, -1);
+    head.next = tail;
+    tail.prev = head;
+  }
+
+  public int get(int key) {
+    if (map.containsKey(key)) {
+      Node node = map.get(key);
+      deleteNode(node);
+      addToHead(node);
+      return node.val;
+    }
+    return -1;
+  }
+
+  public void put(int key, int value) {
+    if (map.containsKey(key)) {
+      Node node = map.get(key);
+      node.val = value;
+      deleteNode(node);
+      addToHead(node);
+    } else {
+      if (currentCapacity == capacity) {
+        Node remove = tail.prev;
+        deleteNode(remove);
+        map.remove(remove.key);
+        currentCapacity--;
+      }
+      Node newNode = new Node(key, value);
+      map.put(key, newNode);
+      addToHead(newNode);
+      currentCapacity++;
+    }
+  }
+
+  private void addToHead(Node node) {
+    node.next = head.next;
+    head.next.prev = node;
+    node.prev = head;
+    head.next = node;
+  }
+
+  private void deleteNode(Node node) {
+    node.prev.next = node.next;
+    node.next.prev = node.prev;
+  }
+
+  private static class Node {
+    int key;
+    int val;
+    Node next;
+    Node prev;
+
+    Node(int k, int v) {
+      key = k;
+      val = v;
+    }
+  }
+
+  /*
   private PriorityQueue<Item> queue;
   private HashMap<Integer, Item> map;
 
@@ -105,6 +185,7 @@ public class LRUCache {
       age = a;
     }
   }
+   */
 
   public static void main(String[] args) {
     /*
@@ -123,10 +204,3 @@ public class LRUCache {
     l.get(4);
   }
 }
-
-/**
- * Your LRUCache object will be instantiated and called as such:
- * LRUCache obj = new LRUCache(capacity);
- * int param_1 = obj.get(key);
- * obj.put(key,value);
- */
