@@ -1,4 +1,4 @@
-package graphs.binary_tree;
+package graphs.tree.BT;
 
 public class BinaryTree {
 //  public static void main(String[] args) {

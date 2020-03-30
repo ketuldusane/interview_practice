@@ -1,4 +1,4 @@
-package graphs.binary_tree;
+package graphs.tree.BT;
 
 /**
  * Populating Next Right Pointers in Each Node

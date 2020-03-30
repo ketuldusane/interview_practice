@@ -1,4 +1,4 @@
-package graphs.binary_tree;
+package graphs.tree.BT;
 
 import java.util.ArrayDeque;
 import java.util.Deque;

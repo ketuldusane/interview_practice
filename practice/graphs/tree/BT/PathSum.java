@@ -1,4 +1,4 @@
-package graphs.binary_tree;
+package graphs.tree.BT;
 
 public class PathSum {
   public boolean hasPathSum(TreeNode root, int sum) {

@@ -1,4 +1,4 @@
-package graphs.binary_tree;
+package graphs.tree.BT;
 
 /**
  * Convert Binary Search Tree to Sorted Doubly Linked List
