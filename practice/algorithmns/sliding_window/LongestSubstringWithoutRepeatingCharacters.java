@@ -27,23 +27,51 @@ import java.util.Set;
  */
 
 public class LongestSubstringWithoutRepeatingCharacters {
+  // BETTER APPROACH: Sliding Window
   public int lengthOfLongestSubstring(String s) {
-    if (s == null || s.length() == 0) return 0;
-    if (s.length() == 1) return 1;
+    if (s == null || s.length() == 0) {
+      return 0;
+    }
+    if (s.length() == 1) {
+      return 1;
+    }
+
+    Set<Character> set = new HashSet<>();
     int i = 0;
     int j = 0;
     int ans = 0;
-    Set<Character> set = new HashSet<>();
-    while(i < s.length() && j < s.length()) {
+
+    while (i < s.length() && j < s.length()) {
       if (!set.contains(s.charAt(j))) {
+        ans = Math.max(ans, j - i + 1);
         set.add(s.charAt(j));
         j++;
-        ans = Math.max(ans, j - i);
       } else {
         set.remove(s.charAt(i));
         i++;
       }
     }
+
     return ans;
   }
+
+//  public int lengthOfLongestSubstring(String s) {
+//    if (s == null || s.length() == 0) return 0;
+//    if (s.length() == 1) return 1;
+//    int i = 0;
+//    int j = 0;
+//    int ans = 0;
+//    Set<Character> set = new HashSet<>();
+//    while(i < s.length() && j < s.length()) {
+//      if (!set.contains(s.charAt(j))) {
+//        set.add(s.charAt(j));
+//        j++;
+//        ans = Math.max(ans, j - i);
+//      } else {
+//        set.remove(s.charAt(i));
+//        i++;
+//      }
+//    }
+//    return ans;
+//  }
 }
