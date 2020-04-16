@@ -1,4 +1,4 @@
-package amazon;
+package amazon.online_assesment;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;

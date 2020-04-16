@@ -1,7 +1,6 @@
-package amazon;
+package amazon.online_assesment;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
