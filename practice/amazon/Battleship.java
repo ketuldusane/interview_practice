@@ -3,7 +3,7 @@ package amazon;
 import java.util.*;
 
 /**
- * ack plays a game of battleships with his friend Stacy. The game is played on a square map of N
+ * Jack plays a game of battleships with his friend Stacy. The game is played on a square map of N
  * rows, numbered from 1 to N. Each row contains N cells, labeled with consecutive English upper-case
  * letters (A, B, C, etc.). Each cell is identified by a string composed of its row number followed by its
  * column number: for example, "9C" denotes the third cell in the 9th row, and "15D" denotes the
