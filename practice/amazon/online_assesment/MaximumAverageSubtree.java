@@ -1,5 +1,7 @@
 package amazon.online_assesment;
 
+import graphs.tree.TreeNode;
+
 /**
  * Maximum Average Subtree
  * <p>
@@ -30,4 +32,47 @@ package amazon.online_assesment;
  */
 
 public class MaximumAverageSubtree {
+  private double max = (double) Integer.MIN_VALUE;
+
+  public double maximumAverageSubtree(TreeNode root) {
+    if (root == null) return 0.0;
+
+    search(root);
+    return max;
+  }
+
+  private Average search(TreeNode root) {
+    if (root == null) {
+      return null;
+    }
+
+    Average left = search(root.left);
+    Average right = search(root.right);
+
+    double avg = (double) root.val;
+    int nodes = 1;
+
+    if (left != null) {
+      avg += left.sum;
+      nodes += left.nodes;
+    }
+
+    if (right != null) {
+      avg += right.sum;
+      nodes += right.nodes;
+    }
+
+    max = Math.max(max, avg / nodes);
+    return new Average(avg, nodes);
+  }
+
+  private static class Average {
+    int nodes;
+    double sum;
+
+    public Average(double sum, int node) {
+      this.sum = sum;
+      this.nodes = node;
+    }
+  }
 }

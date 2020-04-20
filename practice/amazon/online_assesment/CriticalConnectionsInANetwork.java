@@ -5,7 +5,9 @@ import java.util.*;
 /**
  * Critical Connections in a network
  * <p>
- * There are n servers numbered from 0 to n-1 connected by undirected server-to-server connections forming a network where connections[i] = [a, b] represents a connection between servers a and b. Any server can reach any other server directly or indirectly through the network.
+ * There are n servers numbered from 0 to n-1 connected by undirected server-to-server connections forming a network
+ * where connections[i] = [a, b] represents a connection between servers a and b. Any server can reach any other server
+ * directly or indirectly through the network.
  * <p>
  * A critical connection is a connection that, if removed, will make some server unable to reach some other server.
  * <p>
@@ -31,6 +33,66 @@ import java.util.*;
  */
 
 public class CriticalConnectionsInANetwork {
+  public List<List<Integer>> criticalConnections(int n, List<List<Integer>> connections) {
+    Map<Integer, Set<Integer>> graph = createGraph(connections);
+
+    return findCriticalEdges(n, connections, graph);
+  }
+
+  private List<List<Integer>> findCriticalEdges(int n, List<List<Integer>> connections, Map<Integer, Set<Integer>> graph) {
+    List<List<Integer>> criticalEdges = new ArrayList<>();
+    Set<Integer> visited;
+
+    for (List<Integer> connection : connections) {
+      visited = new HashSet<>();
+
+      int a = connection.get(0);
+      int b = connection.get(1);
+
+      graph.get(a).remove(b);
+      graph.get(b).remove(a);
+
+      dfs(graph, 1, visited);
+      if (visited.size() != n) {
+        if (a > b) {
+          criticalEdges.add(Arrays.asList(b, a));
+        } else {
+          criticalEdges.add(Arrays.asList(a, b));
+        }
+      }
+
+      graph.get(a).add(b);
+      graph.get(b).add(a);
+    }
+
+    return criticalEdges;
+  }
+
+  private void dfs(Map<Integer, Set<Integer>> graph, int node, Set<Integer> visited) {
+    visited.add(node);
+    for (int n : graph.get(node)) {
+      if (!visited.contains(n)) {
+        dfs(graph, n, visited);
+      }
+    }
+  }
+
+  private Map<Integer, Set<Integer>> createGraph(List<List<Integer>> connections) {
+    Map<Integer, Set<Integer>> graph = new HashMap<>();
+    for (List<Integer> l : connections) {
+      int a = l.get(0);
+      int b = l.get(1);
+
+      graph.computeIfAbsent(a, k -> new HashSet<>());
+      graph.get(a).add(b);
+
+      graph.computeIfAbsent(b, k -> new HashSet<>());
+      graph.get(b).add(a);
+    }
+    return graph;
+  }
+
+  /*
   public List<List<Integer>> criticalConnections(int n, List<List<Integer>> connections) {
     // Create a graph using the connections provided
     Map<Integer, Node> nodes = createGraph(n, connections);
@@ -105,4 +167,5 @@ public class CriticalConnectionsInANetwork {
       neighbors = new ArrayList<>();
     }
   }
+  */
 }
