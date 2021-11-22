@@ -1,7 +1,7 @@
 class IP {
     public static String checkIPValidity(String addressIP) {
         String answer = "hello";
-        if(addressIP.length() == 0) return "Neither";
+        if(addressIP.length() == 0) return "INVALID";
         String[] address = addressIP.split("\\.",-1);
         if(address.length == 4){
             for (String num : address) {
