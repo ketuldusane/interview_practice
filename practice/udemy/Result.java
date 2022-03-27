@@ -11,6 +11,10 @@ public class Result {
 
     static Gson gson = new Gson();
 
+    public static void main(String[] args) throws Exception {
+        System.out.println(getTransactions(2, 8, 5, 50));
+    }
+
     public static int getTransactions(int userId, int locationId, int netStart, int netEnd) throws Exception {
 
         // get data for first page
@@ -31,9 +35,14 @@ public class Result {
                 if (data.location.id == locationId) {
                     // query ip
                     String ip = data.ip;
-                    int firstByte = Integer.parseInt(ip.split(".")[0]);
+                    int firstByte = Integer.parseInt(ip.split("\\.")[0]);
                     if (firstByte >= netStart && firstByte <= netEnd) {
-                        sum += (int) Double.parseDouble(data.amount);
+                        String temp = data.amount;
+                        temp = temp.replace(",", "");
+                        if (data.amount.startsWith("$")) {
+                            temp = temp.split("\\$")[1];
+                        }
+                        sum += (int) Double.parseDouble(temp);
                     }
                 }
             }
@@ -44,7 +53,7 @@ public class Result {
 
     private static String getResult(int userId, int pageNum) throws Exception {
         StringBuilder result = new StringBuilder();
-        URL url = new URL("https://jsonmock.hackerrank.com/api.transactions/search?userid=" + userId + "&page=" + pageNum);
+        URL url = new URL("https://jsonmock.hackerrank.com/api/transactions/search?userid=" + userId + "&page=" + pageNum);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
         try (BufferedReader reader = new BufferedReader(
