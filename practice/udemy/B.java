@@ -1,6 +1,9 @@
 package udemy;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -13,7 +16,7 @@ public class B {
         Map<String, Map<String, Integer>> brandDetails = new HashMap<>();
 
         int n = 0;
-        Scanner scanner = new Scanner(new File(""));
+        Scanner scanner = new Scanner(new File(input_file_name));
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
             if (n != 0) {
@@ -34,6 +37,20 @@ public class B {
             }
             n++;
         }
+
+        // generate first file
+        File first = new File("0_" + input_file_name);
+        first.createNewFile();
+        FileOutputStream fos = new FileOutputStream(first);
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
+        for (String name : qtyDetails.keySet()) {
+            String s = name + "," + (qtyDetails.get(name).qty / qtyDetails.get(name).orders);
+            bw.write(s);
+            bw.newLine();
+        }
+        bw.close();
+
+
         scanner.close();
     }
 
