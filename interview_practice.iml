@@ -11,7 +11,8 @@
       <sourceFolder url="file://$MODULE_DIR$/stringbuilder" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/temp" isTestSource="true" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="corretto-17" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="google.code.gson" level="project" />
   </component>
 </module>
