@@ -1,19 +1,48 @@
 package udemy;
 
+import com.google.gson.Gson;
+
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class Result {
 
-    public static int getTransactions(int userId, int locationId, int netStart, int netEnd) throws IOException {
+    static Gson gson = new Gson();
 
+    public static int getTransactions(int userId, int locationId, int netStart, int netEnd) throws Exception {
 
+        // get data for first page
+        String firstPage = getResult(userId, 1);
+        Response response = gson.fromJson(firstPage, Response.class);
+
+        // how many pages
+        int pages = response.total_pages;
+
+        int sum = 0;
+
+        // start querying
+        for (int i = 1; i <= pages; i++) {
+            response = gson.fromJson(getResult(userId, i), Response.class);
+            // query data
+            for (Data data : response.data) {
+                // check location
+                if (data.location.id == locationId) {
+                    // query ip
+                    String ip = data.ip;
+                    int firstByte = Integer.parseInt(ip.split(".")[0]);
+                    if (firstByte >= netStart && firstByte <= netEnd) {
+                        sum += (int) Double.parseDouble(data.amount);
+                    }
+                }
+            }
+        }
+
+        return sum;
     }
 
-    private static String getResult(String userId, String pageNum) throws Exception {
+    private static String getResult(int userId, int pageNum) throws Exception {
         StringBuilder result = new StringBuilder();
         URL url = new URL("https://jsonmock.hackerrank.com/api.transactions/search?userid=" + userId + "&page=" + pageNum);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
